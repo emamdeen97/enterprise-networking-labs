@@ -4,8 +4,6 @@
 ! Links: R1 and R3
 
 
-R2
-
 en
 conf t
 hos R2
