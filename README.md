@@ -12,9 +12,8 @@ This repository documents my practical learning journey in enterprise networking
 |---|---|---|
 | 01 | [OSPF Routing Across Multiple Routers](labs/01-ospf-routing/) | ✅ Completed & Tested |
 | 02 | Network Security: VLANs, ACLs & Port Security | ⬜ Planned |
-| 03 | Network Automation with Python & JSON | ⬜ Planned |
-| 04 | Enterprise Network Design from Scratch | ⬜ Planned |
-| 05 | Network Outage Troubleshooting | ⬜ Planned |
+| 03 | Enterprise Network Design from Scratch | ⬜ Planned |
+| 04 | Network Outage Troubleshooting | ⬜ Planned |
 
 ## Completed Labs
 
