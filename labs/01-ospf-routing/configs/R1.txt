@@ -4,29 +4,26 @@
 ! Transit link to R2: 10.0.12.0/30
 
 
-enable
-configure terminal
-
-hostname R1
+ena
+conf t
+ho R1
 no ip domain-lookup
 
-interface GigabitEthernet0/0
- description LAN-1
- ip address 192.168.10.1 255.255.255.0
- no shutdown
-exit
+int gig 0/0
+des LAN-1
+ip add 192.168.10.1 255.255.255.0
+no shut
+ex
 
-interface GigabitEthernet0/1
- description LINK-TO-R2
- ip address 10.0.12.1 255.255.255.252
- no shutdown
-exit
+int gig 0/1
+des Link to R1
+ip add 10.0.2.1 255.255.255.252
+no shut
+ex
 
 router ospf 1
- router-id 1.1.1.1
- network 192.168.10.0 0.0.0.255 area 0
- network 10.0.12.0 0.0.0.3 area 0
-exit
-
+rout-id 1.1.1.1
+network 192.168.10.0 0.0.0.255 area 0
+netw 10.0.12.0 0.0.0.3 area 0
 end
-write memory
+writ mem
