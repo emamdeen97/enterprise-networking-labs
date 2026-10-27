@@ -20,12 +20,7 @@ This repository documents my practical learning journey in enterprise networking
 | 08 | STP and EtherChannel | ⬜ Planned |
 | 09 | Pv4 Subnetting Lab | ⬜ Planned |
 
-## Mini Project
 
-| Lab | Project |
-|---|---|
-| 01 | IP Address Management Plan |
-| 02 | Network Troubleshooting Casebook |
 
 ## Completed Labs
 
@@ -80,9 +75,6 @@ enterprise-networking-labs/
 |   ├── 08-STP and EtherChannel
 │   └── 09-Pv4 Subnetting Lab
 |
-├── Mini Project
-|    ├── 01-IP Address Management Plan
-|    └── 02-Network Troubleshooting Casebook
 └── docs/
 ```
 
