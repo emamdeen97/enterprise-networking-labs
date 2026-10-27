@@ -1,30 +1,50 @@
 # Enterprise Networking Labs
 
-Hands-on networking projects focused on CCNA and CCNP Enterprise concepts, network security, automation, and troubleshooting.
+Hands-on networking projects focused on CCNA and CCNP Enterprise concepts, routing and switching, network security, automation, and troubleshooting.
 
 ## About This Project
 
-This repository documents my practical learning journey in enterprise networking. Each lab includes network topology, IP addressing, device configurations, verification commands, and troubleshooting notes.
+This repository documents my practical learning journey in enterprise networking using Cisco Packet Tracer and other networking tools. Each lab includes network topology, IP addressing, device configurations, verification commands, and troubleshooting notes.
 
-## Lab Roadmap
+## Lab Roadmap & Progress
 
 | Lab | Project | Status |
 |---|---|---|
-| 01 | OSPF Routing Across Multiple Routers | 🟡 In Progress |
+| 01 | [OSPF Routing Across Multiple Routers](labs/01-ospf-routing/) | ✅ Completed & Tested |
 | 02 | Network Security: VLANs, ACLs & Port Security | ⬜ Planned |
 | 03 | Network Automation with Python & JSON | ⬜ Planned |
 | 04 | Enterprise Network Design from Scratch | ⬜ Planned |
 | 05 | Network Outage Troubleshooting | ⬜ Planned |
 
-## Tools and Technologies
+## Completed Labs
+
+### Lab 01 — OSPF Routing Across Three Routers
+
+**Status:** Completed and tested in Cisco Packet Tracer
+
+Built a three-router network using Cisco 2911 routers, Cisco 2960 switches, and three PCs.
+
+**Key implementations:**
+- Configured IPv4 addressing on router interfaces.
+- Established OSPFv2 neighbor adjacencies in Area 0.
+- Advertised LAN and transit networks using OSPF.
+- Verified dynamically learned routes.
+- Configured PC addressing and default gateways.
+- Tested connectivity between different LANs.
+
+**Technologies:** Cisco IOS CLI, OSPFv2, IPv4, Cisco Packet Tracer.
+
+[View Lab 01 documentation and configurations](labs/01-ospf-routing/)
+
+## Tools & Technologies
 
 - Cisco Packet Tracer
 - Cisco IOS-style CLI
-- OSPF and IP routing
-- VLANs, trunking, ACLs and DHCP
+- OSPF and IPv4 routing
+- VLANs, trunking, ACLs, and DHCP
 - Python and JSON
 - Git and GitHub
-- EVE-NG (for advanced labs, where supported)
+- EVE-NG for advanced labs where supported
 
 ## Repository Structure
 
@@ -34,6 +54,9 @@ enterprise-networking-labs/
 ├── LICENSE
 ├── labs/
 │   ├── 01-ospf-routing/
+│   │   ├── README.md
+│   │   ├── configs/
+│   │   └── screenshots/
 │   ├── 02-network-security/
 │   ├── 03-network-automation/
 │   ├── 04-enterprise-network/
@@ -43,28 +66,17 @@ enterprise-networking-labs/
 
 ## Learning Objectives
 
-- Configure and verify dynamic routing.
+- Configure and verify dynamic routing protocols.
 - Implement network segmentation and access controls.
-- Automate repeatable network tasks.
+- Automate repeatable network tasks using Python.
 - Design enterprise network topologies.
 - Troubleshoot connectivity using a structured methodology.
-- Document technical work clearly.
+- Document technical work clearly and professionally.
 
-## Lab Documentation
+## Project Progress
 
-Every completed lab will include:
-
-- Problem statement and objectives
-- Network topology and addressing table
-- Device configurations
-- Verification and connectivity tests
-- Troubleshooting scenarios and solutions
-- Screenshots and lessons learned
+Labs are marked completed only after the relevant configurations and verification tests have been performed. Additional labs will be documented as they are built and tested.
 
 ## Disclaimer
 
-This is an independent educational lab project. Configurations are tested in simulation or compatible lab environments where indicated. Always validate configurations before using them on production networks.
-
-## Progress
-
-Labs will be added as they are built, tested, and documented.
+This repository is an independent educational project. Configurations are intended for simulation and learning. Always validate configurations before applying them to production networks.
