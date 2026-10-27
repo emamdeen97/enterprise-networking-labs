@@ -11,9 +11,21 @@ This repository documents my practical learning journey in enterprise networking
 | Lab | Project | Status |
 |---|---|---|
 | 01 | [OSPF Routing Across Multiple Routers](labs/01-ospf-routing/) | ✅ Completed & Tested |
-| 02 | Network Security: VLANs, ACLs & Port Security | ⬜ Planned |
+| 02 | Network Security: VLANs, ACLs & Port Security | 🟡 In Progress |
 | 03 | Enterprise Network Design from Scratch | ⬜ Planned |
 | 04 | Network Outage Troubleshooting | ⬜ Planned |
+| 05 | VLANs and Trunking | ⬜ Planned |
+| 06 | Inter-VLAN Routing | ⬜ Planned |
+| 07 | DHCP and NAT/PAT | ⬜ Planned |
+| 08 | STP and EtherChannel | ⬜ Planned |
+| 09 | Pv4 Subnetting Lab | ⬜ Planned |
+
+## Mini Project
+
+| Lab | Project | Status |
+|---|---|---|
+| 01 | IP Address Management Plan | ✅ Completed & Tested |
+| 02 | Network Troubleshooting Casebook | ⬜ Planned |
 
 ## Completed Labs
 
@@ -39,11 +51,14 @@ Built a three-router network using Cisco 2911 routers, Cisco 2960 switches, and 
 
 - Cisco Packet Tracer
 - Cisco IOS-style CLI
-- OSPF and IPv4 routing
+- IPv4 addressing and subnetting
+- OSPF routing
 - VLANs, trunking, ACLs, and DHCP
-- Python and JSON
 - Git and GitHub
 - EVE-NG for advanced labs where supported
+- DHCP and NAT/PAT
+- STP and EtherChannel
+- Network troubleshooting commands
 
 ## Repository Structure
 
@@ -57,9 +72,17 @@ enterprise-networking-labs/
 │   │   ├── configs/
 │   │   └── screenshots/
 │   ├── 02-network-security/
-│   ├── 03-network-automation/
-│   ├── 04-enterprise-network/
-│   └── 05-network-troubleshooting/
+│   ├── 03-enterprise-network/
+│   ├── 04-network-troubleshooting/
+|   ├── 05-VLANs and Trunking
+|   ├── 06-Inter-VLAN Routin
+|   ├── 07-DHCP and NAT/PAT
+|   ├── 08-STP and EtherChannel
+│   └── 09-Pv4 Subnetting Lab
+|
+├── Mini Project
+|    ├── 01-IP Address Management Plan
+|    └── 02-Network Troubleshooting Casebook
 └── docs/
 ```
 
