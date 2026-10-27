@@ -3,29 +3,28 @@
 ! LAN: 192.168.30.0/24
 ! Transit link to R2: 10.0.23.0/30
 
-enable
-configure terminal
 
-hostname R3
+en
+con t
+hos R3
 no ip domain-lookup
 
-interface GigabitEthernet0/0
- description LAN-3
- ip address 192.168.30.1 255.255.255.0
- no shutdown
-exit
+int gig 0/1
+des Link-to-R2
+ip add 10.0.23.2 255.255.255.252
+no shut
+ex
 
-interface GigabitEthernet0/1
- description LINK-TO-R2
- ip address 10.0.23.2 255.255.255.252
- no shutdown
+int gig 0/0
+des Lan-3
+ip add 192.168.30.1 255.255.255.0
+no shut
 exit
 
 router ospf 1
- router-id 3.3.3.3
- network 192.168.30.0 0.0.0.255 area 0
- network 10.0.23.0 0.0.0.3 area 0
-exit
-
+router-id 3.3.3.3
+network 192.168.30.0 0.0.0.255 area 0
+network 10.0.23.0 0.0.0.3 area 0
 end
-write memory
+write mem
+
