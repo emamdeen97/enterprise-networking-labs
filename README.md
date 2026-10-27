@@ -22,10 +22,10 @@ This repository documents my practical learning journey in enterprise networking
 
 ## Mini Project
 
-| Lab | Project | Status |
-|---|---|---|
-| 01 | IP Address Management Plan | ✅ Completed & Tested |
-| 02 | Network Troubleshooting Casebook | ⬜ Planned |
+| Lab | Project |
+|---|---|
+| 01 | IP Address Management Plan |
+| 02 | Network Troubleshooting Casebook |
 
 ## Completed Labs
 
