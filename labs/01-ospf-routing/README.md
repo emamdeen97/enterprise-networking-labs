@@ -1,98 +1,91 @@
-# Lab 01: OSPF Routing Across Multiple Routers
+# Lab 01: OSPF Routing Across Three Routers
 
-## 1. Overview
-
-This lab demonstrates how to configure Open Shortest Path First (OSPF) routing across three routers. The goal is to establish OSPF neighbor relationships, exchange routes dynamically, and verify end-to-end connectivity between three LANs.
-
-**Difficulty:** Beginner to Intermediate  
+**Status:** Completed and tested in Cisco Packet Tracer  
 **Protocol:** OSPFv2  
-**OSPF area:** Area 0  
-**Environment:** Cisco Packet Tracer
+**Area:** Area 0  
+**Platform:** Cisco Packet Tracer — Cisco 2911 routers and Cisco 2960 switches
+
+## 1. Project Overview
+
+This lab demonstrates dynamic routing between three LANs using Open Shortest Path First (OSPF). Three routers exchange routing information, allowing hosts on separate IP networks to communicate without manually configuring static routes.
+
+The lab covers interface configuration, OSPF neighbor formation, route learning, connectivity testing, and network verification.
 
 ## 2. Objectives
 
 - Configure IPv4 addresses on router interfaces.
-- Enable OSPF on three routers.
-- Establish OSPF neighbor adjacencies.
-- Advertise LAN and transit networks.
+- Establish OSPF adjacencies in Area 0.
+- Advertise LAN and transit networks through OSPF.
 - Verify dynamically learned routes.
-- Test connectivity between remote LANs.
-- Document troubleshooting procedures.
+- Configure PCs with correct IP addresses and default gateways.
+- Test connectivity between local and remote LANs.
+- Document configuration and verification evidence.
 
 ## 3. Network Topology
 
-```text
- LAN 1                 LAN 2                 LAN 3
-192.168.10.0/24      192.168.20.0/24      192.168.30.0/24
-      |                     |                     |
-     R1 ------------------- R2 ------------------- R3
- 10.0.12.1             10.0.12.2
-                       10.0.23.1             10.0.23.2
+The network consists of three routers connected in a line. Each router connects to a LAN containing a switch and a PC.
 
-              OSPF Area 0 across all routers
+```text
+PC0 --- SW1 --- R1 -------- R2 -------- R3 --- SW3 --- PC2
+                  |           |           |
+                LAN 1       LAN 2       LAN 3
+                            |
+                           SW2
+                            |
+                           PC1
 ```
 
-The diagram is conceptual. Interface names depend on the router models used in the simulator.
+**Router transit links**
 
-## 4. IP Addressing Table
+- R1 Gi0/1 ↔ R2 Gi0/1
+- R2 Gi0/2 ↔ R3 Gi0/1
 
-| Device | Interface role | IP address | Subnet mask |
+**LAN interfaces**
+
+- R1 Gi0/0 → SW1
+- R2 Gi0/0 → SW2
+- R3 Gi0/0 → SW3
+
+## 4. IP Addressing Plan
+
+### Router interfaces
+
+| Device | Interface | IP address | Subnet mask |
 |---|---|---|---|
-| R1 | LAN | 192.168.10.1 | 255.255.255.0 |
-| R1 | R1-R2 link | 10.0.12.1 | 255.255.255.252 |
-| R2 | R1-R2 link | 10.0.12.2 | 255.255.255.252 |
-| R2 | LAN | 192.168.20.1 | 255.255.255.0 |
-| R2 | R2-R3 link | 10.0.23.1 | 255.255.255.252 |
-| R3 | R2-R3 link | 10.0.23.2 | 255.255.255.252 |
-| R3 | LAN | 192.168.30.1 | 255.255.255.0 |
+| R1 | Gi0/0 | 192.168.10.1 | 255.255.255.0 |
+| R1 | Gi0/1 | 10.0.12.1 | 255.255.255.252 |
+| R2 | Gi0/0 | 192.168.20.1 | 255.255.255.0 |
+| R2 | Gi0/1 | 10.0.12.2 | 255.255.255.252 |
+| R2 | Gi0/2 | 10.0.23.1 | 255.255.255.252 |
+| R3 | Gi0/0 | 192.168.30.1 | 255.255.255.0 |
+| R3 | Gi0/1 | 10.0.23.2 | 255.255.255.252 |
+
+### End devices
+
+| Device | IP address | Default gateway |
+|---|---|---|
+| PC0 | 192.168.10.10/24 | 192.168.10.1 |
+| PC1 | 192.168.20.10/24 | 192.168.20.1 |
+| PC2 | 192.168.30.10/24 | 192.168.30.1 |
+
+All PCs use subnet mask `255.255.255.0`.
 
 ## 5. OSPF Configuration
 
-Configure interface IP addresses and enable the interfaces before configuring OSPF. Use the appropriate interface names for your selected devices.
+OSPF process ID: `1`  
+OSPF area: `0`
 
-### R1
+| Router | Router ID | Advertised networks |
+|---|---|---|
+| R1 | 1.1.1.1 | 192.168.10.0/24, 10.0.12.0/30 |
+| R2 | 2.2.2.2 | 192.168.20.0/24, 10.0.12.0/30, 10.0.23.0/30 |
+| R3 | 3.3.3.3 | 192.168.30.0/24, 10.0.23.0/30 |
 
-```cisco
-enable
-configure terminal
-router ospf 1
- router-id 1.1.1.1
- network 192.168.10.0 0.0.0.255 area 0
- network 10.0.12.0 0.0.0.3 area 0
-end
-write memory
-```
-
-### R2
-
-```cisco
-enable
-configure terminal
-router ospf 1
- router-id 2.2.2.2
- network 192.168.20.0 0.0.0.255 area 0
- network 10.0.12.0 0.0.0.3 area 0
- network 10.0.23.0 0.0.0.3 area 0
-end
-write memory
-```
-
-### R3
-
-```cisco
-enable
-configure terminal
-router ospf 1
- router-id 3.3.3.3
- network 192.168.30.0 0.0.0.255 area 0
- network 10.0.23.0 0.0.0.3 area 0
-end
-write memory
-```
+Router configuration files are available in the `configs/` directory.
 
 ## 6. Verification Commands
 
-Run these commands on the routers and record the results.
+The following commands were used to inspect interface status, OSPF neighbors, and learned routes.
 
 ```cisco
 show ip interface brief
@@ -102,53 +95,71 @@ show ip route ospf
 show ip protocols
 ```
 
-Test connectivity between hosts in different LANs:
+### OSPF neighbor verification
 
-```cisco
+The middle router, R2, should form adjacencies with:
+
+- R1 — Router ID `1.1.1.1`
+- R3 — Router ID `3.3.3.3`
+
+The expected neighbor state is `FULL`.
+
+### Connectivity verification
+
+From PC0, test the local gateway and remote LANs:
+
+```text
+ping 192.168.10.1
+ping 192.168.20.10
 ping 192.168.30.10
-traceroute 192.168.30.10
 ```
 
-The remote host address assumes a PC is configured at `192.168.30.10` with the correct subnet mask and default gateway.
+**Observed result:** Successful pings were reported for the configured network.
 
-## 7. Expected Results
+## 7. Troubleshooting Methodology
 
-- Router interfaces have the correct IP addresses and are operational.
-- R1 and R2 form an OSPF adjacency.
-- R2 and R3 form an OSPF adjacency.
-- Remote LAN routes appear as OSPF-learned routes.
-- Hosts in different LANs can communicate when all configurations are correct.
+When troubleshooting this lab:
 
-These results must be verified in the simulator before marking the lab complete.
+1. Verify interface IP addresses and operational status.
+2. Check physical connections and interface states.
+3. Confirm OSPF network statements, router IDs, and area assignments.
+4. Check neighbor adjacency using `show ip ospf neighbor`.
+5. Inspect learned routes using `show ip route ospf`.
+6. Verify PC IP addresses, subnet masks, and default gateways.
+7. Test connectivity from the local gateway toward remote LANs.
 
-## 8. Troubleshooting Checklist
+## 8. Evidence
 
-If OSPF neighbors or remote routes are missing:
+Screenshots documenting the completed lab are stored in `screenshots/`.
 
-1. Check interface status and IP addressing.
-2. Verify the subnet masks on both ends of each transit link.
-3. Check OSPF network statements and area assignments.
-4. Confirm that OSPF neighbors reach the FULL state.
-5. Inspect routing tables for missing remote networks.
-6. Verify host IP addresses, subnet masks, and default gateways.
-7. Repeat the ping test after correcting the issue.
+- `topology.png` — Complete Packet Tracer topology.
+- `ospf-neighbors.png` — OSPF neighbor output from R2.
+- `connectivity-test.png` — Successful connectivity tests from PC0.
 
-## 9. Results and Evidence
+## 9. Repository Contents
 
-After completing the lab, add:
+```text
+01-ospf-routing/
+├── README.md
+├── enterprise-ospf-lab.pkt
+├── configs/
+│   ├── R1.txt
+│   ├── R2.txt
+│   └── R3.txt
+└── screenshots/
+    ├── topology.png
+    ├── ospf-neighbors.png
+    └── connectivity-test.png
+```
 
-- A screenshot of the final topology.
-- OSPF neighbor output from each router.
-- Routing table output showing remote OSPF routes.
-- Successful end-to-end connectivity tests.
-- A short explanation of any issue encountered and its resolution.
+## 10. Key Learnings
 
-## 10. Learning Notes
+- OSPF dynamically discovers neighbors and exchanges routing information.
+- Wildcard masks determine which interfaces participate in OSPF.
+- Remote LAN routes can be learned without static routes.
+- Default gateways are required for hosts to reach remote IP networks.
+- Successful routing requires correct interface addressing, operational links, routing information, and host configuration.
 
-Document what you learned about OSPF neighbor formation, route advertisement, wildcard masks, and dynamic routing.
+## Disclaimer
 
-## Status
-
-**Status:** In Progress
-
-Update this status only after the configuration and connectivity tests have been completed successfully.
+This is an educational simulation created in Cisco Packet Tracer. The configurations are intended for lab use and should be validated before any deployment in a production environment.
