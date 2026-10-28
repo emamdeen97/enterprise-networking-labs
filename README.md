@@ -11,8 +11,8 @@ This repository documents my practical learning journey in enterprise networking
 | Lab | Project | Status |
 |---|---|---|
 | 01 | [OSPF Routing Across Multiple Routers](labs/01-ospf-routing/) | ✅ Completed & Tested |
-| 02 | Network Security: VLANs, ACLs & Port Security | 🟡 In Progress |
-| 03 | Enterprise Network Design from Scratch | ⬜ Planned |
+| 02 | Network Security: VLANs, ACLs & Port Security | ✅ Completed & Tested |
+| 03 | Enterprise Network Design from Scratch | 🟡 In Progress |
 | 04 | Network Outage Troubleshooting | ⬜ Planned |
 | 05 | VLANs and Trunking | ⬜ Planned |
 | 06 | Inter-VLAN Routing | ⬜ Planned |
