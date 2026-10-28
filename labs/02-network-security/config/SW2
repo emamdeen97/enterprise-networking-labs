@@ -1,0 +1,47 @@
+enable
+configure terminal
+hostname SW2
+
+vlan 10
+ name ADMIN
+exit
+vlan 20
+ name STAFF
+exit
+vlan 30
+ name GUEST
+exit
+
+interface fastEthernet0/1
+ switchport mode access
+ switchport access vlan 10
+ switchport port-security
+ switchport port-security maximum 1
+ switchport port-security mac-address sticky
+ switchport port-security violation shutdown
+exit
+
+interface fastEthernet0/2
+ switchport mode access
+ switchport access vlan 20
+ switchport port-security
+ switchport port-security maximum 1
+ switchport port-security mac-address sticky
+ switchport port-security violation shutdown
+exit
+
+interface fastEthernet0/3
+ switchport mode access
+ switchport access vlan 30
+ switchport port-security
+ switchport port-security maximum 1
+ switchport port-security mac-address sticky
+ switchport port-security violation shutdown
+exit
+
+interface fastEthernet0/24
+ switchport mode trunk
+exit
+
+end
+copy running-config startup-config
